@@ -20,6 +20,8 @@
     "paths": {
       "@common/*": ["src/common/*"],
       "@config/*": ["src/config/*"],
+      "@telegram/*": ["src/modules/telegram/*"],
+      "@chatgpt/*": ["src/modules/chatgpt/*"],
     }
   }
 }
