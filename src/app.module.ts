@@ -7,15 +7,15 @@ import { TelegramModule } from './modules/telegram/telegram.module';
 import { ChatGPTModule } from './modules/chatgpt/chatgpt.module';
 
 @Module({
-    imports: [
-        ConfigModule.forRoot({
-            isGlobal: true,
-            envFilePath: '.env',
-        }),
-        ScheduleModule.forRoot(),
-        TypeOrmModule.forRootAsync(typeOrmAsyncConfig),
-        TelegramModule,
-        ChatGPTModule,
-    ],
+	imports: [
+		ConfigModule.forRoot({
+			isGlobal: true,
+			envFilePath: '.env',
+		}),
+		ScheduleModule.forRoot(),
+		TypeOrmModule.forRootAsync(typeOrmAsyncConfig),
+		TelegramModule,
+		ChatGPTModule,
+	],
 })
 export class AppModule {}

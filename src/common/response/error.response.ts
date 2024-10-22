@@ -8,35 +8,35 @@ import { BaseResponse } from './abstract/base.response';
  * will catch controller return value and transform them to the current type.
  */
 export class ErrorResponse extends BaseResponse {
-    /**
-     * Response path.
-     */
-    @ApiProperty()
-    public readonly path!: string;
+	/**
+	 * Response path.
+	 */
+	@ApiProperty()
+	public readonly path!: string;
 
-    /**
-     * Response timestamp.
-     */
-    @ApiProperty()
-    public readonly timestamp!: number;
+	/**
+	 * Response timestamp.
+	 */
+	@ApiProperty()
+	public readonly timestamp!: number;
 
-    /**
-     * Response error.
-     *
-     * @description Human-readable response error of unknown type.
-     */
-    @ApiProperty()
-    public readonly error!: unknown;
+	/**
+	 * Response error.
+	 *
+	 * @description Human-readable response error of unknown type.
+	 */
+	@ApiProperty()
+	public readonly error!: unknown;
 
-    constructor(
-        statusCode: number,
-        path: string,
-        timestamp: number,
-        error: unknown,
-    ) {
-        super(statusCode);
-        this.path = path;
-        this.timestamp = timestamp;
-        this.error = error;
-    }
+	constructor(
+		statusCode: number,
+		path: string,
+		timestamp: number,
+		error: unknown,
+	) {
+		super(statusCode);
+		this.path = path;
+		this.timestamp = timestamp;
+		this.error = error;
+	}
 }

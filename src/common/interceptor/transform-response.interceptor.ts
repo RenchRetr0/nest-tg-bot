@@ -6,30 +6,30 @@ import { Response } from 'express';
 import { Observable, map } from 'rxjs';
 
 export class TransformResponseInterceptor<T>
-    implements NestInterceptor<T, SuccessResponse<T>>
+	implements NestInterceptor<T, SuccessResponse<T>>
 {
-    public intercept(
-        context: ExecutionContext,
-        next: CallHandler<T>,
-    ): Observable<SuccessResponse<T>> {
-        const response: Response = context
-            .switchToHttp()
-            .getResponse<Response>();
-        const statusCode: number = response.statusCode;
-        const message: string =
-            response?.statusMessage ?? HttpStatusMessage[statusCode];
+	public intercept(
+		context: ExecutionContext,
+		next: CallHandler<T>,
+	): Observable<SuccessResponse<T>> {
+		const response: Response = context
+			.switchToHttp()
+			.getResponse<Response>();
+		const statusCode: number = response.statusCode;
+		const message: string =
+			response?.statusMessage ?? HttpStatusMessage[statusCode];
 
-        return next
-            .handle()
-            .pipe(
-                map(
-                    (data: T) =>
-                        new SuccessResponse(
-                            statusCode,
-                            message,
-                            instanceToPlain(data) as T,
-                        ),
-                ),
-            );
-    }
+		return next
+			.handle()
+			.pipe(
+				map(
+					(data: T) =>
+						new SuccessResponse(
+							statusCode,
+							message,
+							instanceToPlain(data) as T,
+						),
+				),
+			);
+	}
 }

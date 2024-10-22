@@ -8,13 +8,13 @@ import { ApiProperty } from '@nestjs/swagger';
  * will transform our controller return values.
  */
 export abstract class BaseResponse {
-    /**
-     * Status code of the response.
-     */
-    @ApiProperty()
-    public readonly statusCode: number;
+	/**
+	 * Status code of the response.
+	 */
+	@ApiProperty()
+	public readonly statusCode: number;
 
-    constructor(statusCode: number) {
-        this.statusCode = statusCode;
-    }
+	constructor(statusCode: number) {
+		this.statusCode = statusCode;
+	}
 }
