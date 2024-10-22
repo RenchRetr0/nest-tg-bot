@@ -7,9 +7,7 @@ import { join } from 'path';
 import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import { ValidationPipe } from '@nestjs/common';
-import { TransformResponseInterceptor } from '@common/interceptor/transform-response.interceptor';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { HttpExceptionFilter } from '@common/filter/http-exception.filter';
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
@@ -19,10 +17,6 @@ async function bootstrap() {
     const port = config.get<number>('APP_PORT');
     const baseUrl = config.get<string>('APP_DOMAIN');
     const serverUrl = config.get<string>('SERVER_URL');
-
-    app.useGlobalFilters(new HttpExceptionFilter());
-    app.useGlobalFilters(new HttpExceptionFilter());
-    app.useGlobalInterceptors(new TransformResponseInterceptor());
 
     app.use('/uploads', express.static(join(__dirname, '..', 'uploads')));
     app.use(
@@ -34,26 +28,26 @@ async function bootstrap() {
         }),
     );
 
-    const configDocument = new DocumentBuilder()
-        .setTitle('SMM Doc')
-        .setDescription('Swagger Super-SMM')
-        .setVersion('1.0')
-        .addBearerAuth()
-        .addServer(baseUrl)
-        .addServer(serverUrl)
-        .build();
-    const document = SwaggerModule.createDocument(app, configDocument);
-    SwaggerModule.setup('swagger', app, document, {
-        swaggerOptions: { persistAuthorization: true },
-    });
+    // const configDocument = new DocumentBuilder()
+    //     .setTitle('SMM Doc')
+    //     .setDescription('Swagger Super-SMM')
+    //     .setVersion('1.0')
+    //     .addBearerAuth()
+    //     .addServer(baseUrl)
+    //     .addServer(serverUrl)
+    //     .build();
+    // const document = SwaggerModule.createDocument(app, configDocument);
+    // SwaggerModule.setup('swagger', app, document, {
+    //     swaggerOptions: { persistAuthorization: true },
+    // });
 
-    app.useGlobalPipes(
-        new ValidationPipe({
-            transform: true,
-            whitelist: true,
-            disableErrorMessages: false,
-        }),
-    );
+    // app.useGlobalPipes(
+    //     new ValidationPipe({
+    //         transform: true,
+    //         whitelist: true,
+    //         disableErrorMessages: false,
+    //     }),
+    // );
     // app.useGlobalGuards(
     //     new JwtAuthGuard(app.get(JwtService), app.get(Reflector)),
     // );
